@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="belrconsole">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Belr Console</title>
@@ -7,72 +7,75 @@
     <link href="content/bootstrap/css/cyborg/bootstrap.css" rel="stylesheet" />
     <link href="content/bootstrap/css/custom.css" rel="stylesheet" />
 </head>
-<body ng-app="belrconsole">
+<body>
     <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
+        <div class="container" data-ng-controller="HeaderCtrl">
             <div class="navbar-header">
-                <a href="../" class="navbar-brand">Bootswatch</a>
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a class="navbar-brand no-href">Belrconsole</a>
             </div>
-            <div class="navbar-collapse collapse" id="navbar-main">
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="themes">
-                            <li><a href="../default/">Default</a></li>
-                            <li class="divider"></li>
-                            <li><a href="../amelia/">Amelia</a></li>
-                            <li><a href="../cerulean/">Cerulean</a></li>
+                        <a class="dropdown-toggle no-href" data-toggle="dropdown">Menu <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/#login">Login</a></li>
+                            <li><a href="/#register">Register</a></li>
+                            <li><a href="/#cart">Cart</a></li>
+                            <li    class="divider" data-ng-show="isLogged()"></li>
+                            <li><a class="no-href" data-ng-show="isLogged()" data-ng-click="Logout()">Logout</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="../help/">Help</a>
-                    </li>
-                    <li>
-                        <a href="http://news.bootswatch.com">Blog</a>
-                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="input-group col-lg-12">
+                        <input class="form-control" placeholder="Quick Search" type="text" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go</button>
+                        </span>
+                    </div>
+                </form>
+                <ul class="hidden nav navbar-nav navbar-right">
+                    <li><a class="no-href">Link</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="download">
-                            <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
-                            <li><a href="./bootstrap.css">bootstrap.css</a></li>
+                        <a class="no-href dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="no-href">Action</a></li>
+                            <li><a class="no-href">Another action</a></li>
+                            <li><a class="no-href">Something else here</a></li>
                             <li class="divider"></li>
-                            <li><a href="./variables.less">variables.less</a></li>
-                            <li><a href="./bootswatch.less">bootswatch.less</a></li>
+                            <li><a class="no-href">Separated link</a></li>
                         </ul>
                     </li>
                 </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
-                    <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
-                </ul>
-
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="page-header row">
             <div class="col-md-3">
                 <ul class="nav">
-                    <li><a href="#addOrder">Add New Order </a></li>
-                    <li><a href="#showOrders">Show Order </a></li>
+                    <li><a href="/#login">Login </a></li>
+                    <li><a href="/#register">Register </a></li>
+                    <li><a href="/#addOrder">Add New Order </a></li>
+                    <li><a href="/#showOrders">Show Order </a></li>
                 </ul>
             </div>
             <div class="col-md-9">
-                <div ng-view></div>
+                <div data-ng-view=""></div>
             </div>
         </div>
             
         <footer>
-            <!--<div class="row">
+            <div class="row hidden">
                 <div class="col-lg-12">
 
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled list-inline">
                         <li class="pull-right"><a href="#top">Back to top</a></li>
                         <li><a href="http://news.bootswatch.com" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
                         <li><a href="http://feeds.feedburner.com/bootswatch">RSS</a></li>
@@ -86,7 +89,7 @@
                     <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
 
                 </div>
-            </div>-->
+            </div>
         </footer>
     </div>
         
@@ -95,11 +98,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Angular Light (version for debug) -->
     <!--<script src="content/alight/alight.debug.js"></script>-->
-    <script src="content/angular/angular.js"></script>
-    <script src="content/angular/angular-route.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-cookies.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <!--<script src="content/js/someCtrl.js"></script>-->
+    <script src="Scripts/ui-bootstrap-0.10.0.js"></script>
+    <script src="Scripts/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="content/js/utils.js"></script>
     <script src="content/js/app.js"></script>
+    <script src="content/js/services/authService.js"></script>
+    <script src="content/js/controllers.js"></script>
 </body>
 </html>

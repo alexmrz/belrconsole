@@ -1,0 +1,39 @@
+﻿<form class="form-horizontal" data-ng-controller="RegisterCtrl" name="RegisterForm" novalidate>
+    <fieldset>
+        <legend>Registration</legend>
+        <tabset justified="true">
+            <tab heading="Credentials*">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label" for="userName">User Name</label>
+                    <div class="col-lg-6">
+                        <input class="form-control" data-ng-model="Register.UserName" id="userName" placeholder="User Name" type="text" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label" for="email">Email</label>
+                    <div class="col-lg-6">
+                        <input class="form-control" data-ng-model="Register.Email" id="email" placeholder="Email" type="email" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label" for="password">Password</label>
+                    <div class="col-lg-6">
+                        <input class="form-control" data-ng-model="Register.Password" id="password" placeholder="Password" type="password" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label" for="confirm">Confirm Password</label>
+                    <div class="col-lg-6">
+                        <input class="form-control" data-ng-model="Register.ConfirmPass" id="confirm" placeholder="Confirm Password" type="password" required="required" />
+                    </div>
+                </div></tab>
+            <tab heading="Address">Short Labeled Justified content</tab>
+            <tab heading="Additional">Long Labeled Justified content</tab>
+        </tabset>
+        <!--<div class="form-group">
+            <div class="col-lg-9 col-lg-offset-3">-->
+                <button class="btn btn-primary pull-right" data-ng-click="Register.Submit()" data-ng-disabled="RegisterForm.$invalid" type="submit">Submit</button>
+            <!--</div>
+        </div>-->
+    </fieldset>
+</form>

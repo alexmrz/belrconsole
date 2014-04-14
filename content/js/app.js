@@ -1,25 +1,33 @@
-﻿var sampleApp = angular.module('belrconsole', ['ngRoute']);
+﻿///<reference path="utils.js"/>
 
-sampleApp.config(['$routeProvider',
-  function ($routeProvider) {
-      $routeProvider.
-        when('/addOrder', {
-            templateUrl: 'templates/add-order.html',
-            controller: 'AddOrderController'
-        }).
-        when('/showOrders', {
-            templateUrl: 'templates/show-orders.html',
-            controller: 'ShowOrdersController'
-        }).
-        otherwise({
-            redirectTo: '/addOrder'
-        });
-  }]);
+var belrconsole = angular.module('belrconsole', ['ngRoute', 'ngCookies', 'ui.bootstrap'])
 
-sampleApp.controller('AddOrderController', function ($scope) {
-    $scope.message = 'This is Add new order screen';
-});
+        .constant('VIEWS', (function () {
+            var url = 'templates/';
+            return {
+                AddOrder: url + 'add-order.html',
+                ShowOrders: url + 'show-orders.html',
+                Login: url + 'login.html',
+                Register: url + 'register.html'
+            };
+        })())
 
-sampleApp.controller('ShowOrdersController', function ($scope) {
-    $scope.message = 'This is Show orders screen';
-});
+        .config(['$routeProvider', 'VIEWS', function ($routeProvider, VIEWS) {
+
+            function when(path, url, ctrl) {
+                $routeProvider.when(path, getBaseRoute(url, ctrl));
+            }
+
+            when('/addOrder',   VIEWS.AddOrder,   'AddOrderCtrl');
+            when('/showOrders', VIEWS.ShowOrders, 'ShowOrdersCtrl');
+            when('/login',      VIEWS.Login,      'LoginCtrl');
+            when('/register',   VIEWS.Register,   'RegisterCtrl');
+
+            $routeProvider.otherwise({ redirectTo: '/showOrders' });
+        }])
+
+        
+        
+        
+        
+        
